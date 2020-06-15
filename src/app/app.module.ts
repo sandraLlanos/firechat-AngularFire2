@@ -11,6 +11,9 @@ import { environment } from '../environments/environment';
 import { ChatComponent } from './components/chat/chat.component';
 import { FormsModule } from '@angular/forms';
 
+import { ChatService } from './services/chat.service';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +27,7 @@ import { FormsModule } from '@angular/forms';
     AppRoutingModule,
     FormsModule
   ],
-  providers: [],
+  providers: [ ChatService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
