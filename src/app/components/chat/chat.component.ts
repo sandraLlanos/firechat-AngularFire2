@@ -11,12 +11,25 @@ export class ChatComponent{
   message:string = "";
   
   constructor( private chatService:ChatService ) { 
-    this.chatService.loadMessages().subscribe( (messages:any[]) => {
-      console.log(messages);      
-    })
+    this.chatService.loadMessages().subscribe( 
+    //   (messages:any[]) => {
+    //   console.log(messages);      
+    // }
+    )
   }
 
   send_message(){
-    console.log(this.message);    
+    console.log(this.message); 
+    if( this.message.length === 0){
+      return;
+    }
+
+    this.chatService.addMessage(this.message)
+        .then( () => {
+          this.message = "";
+          console.log('mensaje enviado correctamente')
+        })
+        .catch( (err) => console.error('error al enviar el mensaje', err)
+        )
   }
 }
