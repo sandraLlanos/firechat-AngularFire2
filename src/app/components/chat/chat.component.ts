@@ -28,7 +28,6 @@ export class ChatComponent implements OnInit{
     // console.log(this.element.scrollHeight);
     
   } 
-
   send_message(){
     console.log(this.message); 
     if( this.message.length === 0){

@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Message } from '../interfaces/message.interface';
 import { map } from 'rxjs/operators'; 
+import { AngularFireAuth } from 'angularfire2/auth';
+import * as firebase from 'firebase/app';
 
 @Injectable({
   providedIn: 'root'
@@ -9,9 +11,11 @@ import { map } from 'rxjs/operators';
 export class ChatService {
   private itemsCollection: AngularFirestoreCollection<Message>;
   public chats:Message[] = [];
+  user:any = {};
   // ejemplo:any[]=[3,5,6,8,7,9,4,2,1];
   // recibeEjemplo=[];
-  constructor( private afs: AngularFirestore ) {
+  constructor( private afs: AngularFirestore,
+               public afAuth: AngularFireAuth ) {
     // Para comprender mejor unshift()
     // console.log(this.ejemplo);
     // this.ejemplo.sort((a,b)=>{
@@ -22,9 +26,24 @@ export class ChatService {
     //   this.recibeEjemplo.unshift(iterator);
     //   console.log(this.recibeEjemplo);      
     // }
-    
+    this.afAuth.authState.subscribe(user =>{
+      console.log(user);
+
+      if(!user){
+        return;
+      }
+      this.user.name = user.displayName;
+      this.user.uid = user.uid;
+      console.log(this.user);
+      
+    })
    }
-  
+  login(social:string) {
+    this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+  }
+  logout() {
+    this.afAuth.auth.signOut();
+  }
   loadMessages(){
     this.itemsCollection = this.afs.collection<Message>('chats', ref => ref.orderBy('date','desc')
                                                                            .limit(5));
