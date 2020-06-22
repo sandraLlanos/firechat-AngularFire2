@@ -3,11 +3,19 @@
     {{chat.mensaje}}
   </li>
 </ul> -->
-<!-- <div class="container main-container">
+<div class="container main-container">
   <h1>Firechat</h1>
-  <div class="chat-window">
-    <app-chat></app-chat>
+  <div class="col-md-12 text-right" *ngIf="cs.user.uid">
+    <button 
+    class="btn btn-outline-danger"
+    (click)="cs.logout()">
+    Salir
+  </button>
   </div>
-</div> -->
-
-<app-login></app-login>
+  <div *ngIf="!cs.user.uid">
+    <app-login></app-login>
+  </div>
+  <!-- <div class="chat-window"> -->
+    <!-- <app-chat></app-chat> -->
+  <!-- </div> -->
+</div>

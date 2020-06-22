@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { AngularFirestore } from 'angularfire2/firestore';
-import { Observable } from 'rxjs';
+import { ChatService } from './services/chat.service';
+
+// import { AngularFirestore } from 'angularfire2/firestore';
+// import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -8,8 +10,16 @@ import { Observable } from 'rxjs';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  chats: Observable<any[]>;
-  constructor(db: AngularFirestore) {
-    this.chats = db.collection('chats').valueChanges();
+
+  constructor( public cs:ChatService){
+
+    // this.cs.logout();
+
   }
+
+  // este código sería sin hacer uso del servicio, al igual que sus importaciones
+  // chats: Observable<any[]>;
+  // constructor(db: AngularFirestore) {
+  //   this.chats = db.collection('chats').valueChanges();
+  // }
 }

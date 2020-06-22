@@ -39,9 +39,15 @@ export class ChatService {
     })
    }
   login(social:string) {
-    this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    if (social === 'google') {
+      this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    } else {
+      this.afAuth.auth.signInWithPopup(new firebase.auth.TwitterAuthProvider());
+    }
   }
   logout() {
+    // se reestablece el usuario
+    this.user = {};
     this.afAuth.auth.signOut();
   }
   loadMessages(){
