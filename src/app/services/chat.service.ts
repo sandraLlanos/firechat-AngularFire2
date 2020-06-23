@@ -70,9 +70,10 @@ export class ChatService {
   addMessage(text:string){
 
     let message:Message = {
-      name: 'Demo',
+      name: this.user.name,
       message: text,
-      date: new Date().getTime()
+      date: new Date().getTime(),
+      uid: this.user.uid
     }
 
     return this.itemsCollection.add(message);
