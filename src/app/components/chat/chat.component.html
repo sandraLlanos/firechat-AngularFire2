@@ -7,7 +7,7 @@
     <span 
     [ngClass]="{'badge-primary': chatService.user.uid == chat.uid,
                 'badge-success': chatService.user.uid != chat.uid}"
-    class="badge">Sandra</span>
+    class="badge">{{chat.name}}</span>
     <p>
       {{ chat.message }}
     </p>
